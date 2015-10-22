@@ -7,6 +7,7 @@
  * Licensed under the MIT license
  *
  * Debounce function from http://davidwalsh.name/javascript-debounce-function
+ * Modified the expanded height to account for images in the setBoxHeights function.
  */
 
 /* global jQuery */
@@ -70,6 +71,10 @@
         expandedHeight = el.outerHeight(),
         cssMaxHeight = parseInt(el.css({maxHeight: ''}).css('max-height').replace(/[^-\d\.]/g, ''), 10),
         defaultHeight = element.data('defaultHeight');
+    
+    if (element.has('img') && expandedHeight < element.outerHeight()) {
+    	expandedHeight = element.outerHeight() + 15;
+    }
 
     el.remove();
 
