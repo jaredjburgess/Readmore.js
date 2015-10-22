@@ -3,12 +3,12 @@ var gulp = require('gulp'),
     rename = require('gulp-rename');
 
 gulp.task('compress', function() {
-  gulp.src('readmore.js')
+  gulp.src('readmore-custom.js')
     .pipe(uglify({
       mangle: true,
       compress: true,
       preserveComments: 'some'
     }))
-    .pipe(rename('readmore.min.js'))
+    .pipe(rename('readmore-custom.min.js'))
     .pipe(gulp.dest('./'));
 });
