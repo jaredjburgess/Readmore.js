@@ -18,7 +18,7 @@ $ bower install readmore
 Then include it in your HTML:
 
 ```html
-<script src="/bower_components/readmore/readmore.min.js"></script>
+<script src="/bower_components/readmore/readmore-custom.min.js"></script>
 ```
 
 
