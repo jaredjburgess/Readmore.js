@@ -6,7 +6,7 @@ The markup Readmore.js requires is so simple, you can probably use it with your 
 
 Readmore.js is tested with—and supported on—all versions of jQuery greater than 1.9.1. All the "good" browsers are supported, as well as IE10+; IE8 & 9 _should_ work, but are not supported and the experience will not be ideal.
 
-Note: This is a fork of the original, bower install has not been tested after the modifications I have made. But as long as the jquery and either readmore-custom.js / readmore-custom.min.js is included in the scripts it will work like before.
+Note: This is a fork of the original (due to the need for having numerous images of unspecified height in the content that needs to expanded & collapsed), bower install has not been tested after the modifications I have made. But providing jquery and either readmore-custom.js / readmore-custom.min.js is included in the scripts it will work like before.
 
 
 ## Install
