@@ -7,7 +7,7 @@
  * Licensed under the MIT license
  *
  * Debounce function from http://davidwalsh.name/javascript-debounce-function
- * Modified the expanded height to account for images in the setBoxHeights function.
+ * @jaredjburgess: Modified the expanded height to account for images in the setBoxHeights function.
  */
 
 /* global jQuery */
