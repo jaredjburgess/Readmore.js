@@ -71,7 +71,7 @@
         expandedHeight = el.outerHeight(),
         cssMaxHeight = parseInt(el.css({maxHeight: ''}).css('max-height').replace(/[^-\d\.]/g, ''), 10),
         defaultHeight = element.data('defaultHeight');
-    
+
     if (element.has('img') && expandedHeight < element.outerHeight()) {
     	expandedHeight = element.outerHeight() + 15;
     }
@@ -249,13 +249,9 @@
       $element.css({'height': newHeight});
 
       // Fire afterToggle callback
-      $element.on('transitionend', function() {
-        $this.options.afterToggle(trigger, element, expanded);
-
-        $(this).attr({
-          'aria-expanded': expanded
-        }).off('transitionend');
-      });
+      $this.options.afterToggle(trigger, element, expanded);
+	  var id = '#' + element.getAttribute('id');
+      $(id).attr({'aria-expanded': expanded});
 
       $(trigger).replaceWith($($this.options[newLink])
           .on('click', function(event) { $this.toggle(this, element, event); })
