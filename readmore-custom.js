@@ -249,9 +249,13 @@
       $element.css({'height': newHeight});
 
       // Fire afterToggle callback
-      $this.options.afterToggle(trigger, element, expanded);
-	  var id = '#' + element.getAttribute('id');
-      $(id).attr({'aria-expanded': expanded});
+      $element.on('animationend', function() {
+        $this.options.afterToggle(trigger, element, expanded);
+
+        $(this).attr({
+          'aria-expanded': expanded
+        }).off('animationend');
+      });
 
       $(trigger).replaceWith($($this.options[newLink])
           .on('click', function(event) { $this.toggle(this, element, event); })
