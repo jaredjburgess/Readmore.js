@@ -8,7 +8,7 @@ Readmore.js is tested with—and supported on—all versions of jQuery greater t
 
 Note: This is a fork of the original (due to the need for having numerous images of unspecified height in the content that needs to expanded & collapsed), bower install has no longer been maintained. To use see the instructions below.
 
-Modifications/Change List 28.10.15
+## Modifications/Change List 28.10.15
 - Modified the expanded height to account for multiple unspecified image heights.
 - Added a disableAfterPress option which prevents the readmore/readless link from being activated
   again in succession (within 150ms). Due to the following issue on mobile devices... the touch
@@ -22,7 +22,7 @@ Modifications/Change List 28.10.15
   === requires jquery-ui.js : Effects Core ===
 
 
-## Install/To Use
+## To Use
 
 Copy the following file
 ```
