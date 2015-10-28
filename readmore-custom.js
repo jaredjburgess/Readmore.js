@@ -2,25 +2,18 @@
  * @preserve
  *
  * Readmore.js jQuery plugin
- * Author: @jed_foster
- * Project home: http://jedfoster.github.io/Readmore.js
+ * Original - Author: @jed_foster
+ * Original - Project home: http://jedfoster.github.io/Readmore.js
+ * Current - Author: @jaredjburgess
+ * Current - Project home: https://github.com/jaredjburgess/Readmore.js
  * Licensed under the MIT license
  *
  * Debounce function from http://davidwalsh.name/javascript-debounce-function
- *
- * @jaredjburgess: v1.01
- * - Modified the expanded height to account for multiple unspecified image heights.
- * - Added a disableAfterPress option which prevents the readmore/readless link from being activated
- *   again in succession (within 150ms). Due to the following issue on mobile devices... the touch
- *   screen can often trigger the recollapse of element just after expanding and attempting to
- *   scroll down)
- *   === requires mutation-summary.js for the DOM element change events ===
- * - Fixed the afterToggle callback which was NOT firing.
- * - Added animation (that previously were not functioning correctly) using jquery-ui.
- *   === requires jquery-ui.js : Effects Core ===
  */
 
 /* global jQuery */
+/* jquery-ui (only 'Effects Core' is required) ~ 32KB (.js), 13KB (.min.js) */
+/* mutation-summary.js */
 
 (function($) {
   'use strict';
