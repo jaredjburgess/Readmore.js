@@ -94,8 +94,9 @@ $('article').readmore({
   beforeToggle: function(trigger, element, expanded) {
     if (expanded) { // The "Close" link was clicked
       if (!$(trigger).is('[disabled]')) {
-        var id = '#' + element.getAttribute('id');
-        $('body').scrollTop($(id).offset().top - 145);
+        var menu_offset = 145
+        var scroll_height = ($(element).offset().top - menu_offset) + 'px';
+        $('body').stop().animate({scrollTop: scroll_height}, 200, "linear");
       }
     }
   }
