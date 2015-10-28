@@ -148,7 +148,7 @@
       var collapseButton = summaries[0];
       collapseButton.added.forEach(function(newEl) {
           $(newEl).attr('disabled', 'true')
-          .delay(150)
+          .delay(250)
           .queue(function() {
               $(this).removeAttr('disabled');
               $(this).dequeue();
