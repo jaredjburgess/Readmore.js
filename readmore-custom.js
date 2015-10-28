@@ -281,9 +281,7 @@
 
 
       // Fire afterToggle callback
-      console.log(newHeight);
       $element.animate({'height': newHeight}, $this.options.speed, "linear", function() {
-          console.log("ive been called bitches");
           $this.options.afterToggle(trigger, element, expanded);
           $element.attr({
             'aria-expanded': expanded
