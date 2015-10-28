@@ -6,23 +6,43 @@ The markup Readmore.js requires is so simple, you can probably use it with your 
 
 Readmore.js is tested with—and supported on—all versions of jQuery greater than 1.9.1. All the "good" browsers are supported, as well as IE10+; IE8 & 9 _should_ work, but are not supported and the experience will not be ideal.
 
-Note: This is a fork of the original (due to the need for having numerous images of unspecified height in the content that needs to expanded & collapsed), bower install has not been tested after the modifications I have made. But providing jquery and either readmore-custom.js / readmore-custom.min.js is included in the scripts it will work like before.
+Note: This is a fork of the original (due to the need for having numerous images of unspecified height in the content that needs to expanded & collapsed), bower install has no longer been maintained. To use see the instructions below.
+
+Modifications/Change List 28.10.15
+- Modified the expanded height to account for multiple unspecified image heights.
+- Added a disableAfterPress option which prevents the readmore/readless link from being activated
+  again in succession (within 150ms). Due to the following issue on mobile devices... the touch
+  screen can often trigger the recollapse of element just after expanding and attempting to
+  scroll down)
+  === requires mutation-summary.js for the DOM element change events ===
+- Fixed the afterToggle callback which was NOT firing.
+- Added animation (that previously were not functioning correctly) using jquery-ui.
+  === requires jquery-ui.js : Effects Core ===
 
 
-## Install
+## Install/To Use
 
-Install Readmore.js with Bower:
-
+Copy the following file
 ```
-$ bower install readmore
+readmore-custom.js
+```
+Or
+```
+readmore-custom.min.js
 ```
 
-Then include it in your HTML:
+Include it in your HTML:
 
 ```html
-<script src="/bower_components/readmore/readmore-custom.min.js"></script>
+<script src=".../readmore-custom.min.js"></script>
 ```
-
+And include the following libraries in your html...
+The standard jquery library [], jquery-ui (only 'Effects Core' is required ~ 32KB (.js), 13KB (.min.js)) [], mutation-summary.js [].
+```html
+<script src=".../jquery.js"></script>
+<script src=".../jquery-ui.js"></script>
+<script src=".../mutation-summary.js"></script>
+```
 
 ## Use
 
@@ -41,7 +61,7 @@ $('article').readmore({
 
 ### The options:
 
-* `speed: 100` in milliseconds
+* `speed: 200` in milliseconds
 * `collapsedHeight: 200` in pixels
 * `heightMargin: 16` in pixels, avoids collapsing blocks that are only slightly larger than `collapsedHeight`
 * `moreLink: '<a href="#">Read more</a>'`
@@ -49,6 +69,7 @@ $('article').readmore({
 * `embedCSS: true` insert required CSS dynamically, set this to `false` if you include the necessary CSS in a stylesheet
 * `blockCSS: 'display: block; width: 100%;'` sets the styling of the blocks, ignored if `embedCSS` is `false`
 * `startOpen: false` do not immediately truncate, start in the fully opened position
+* `disableAfterPress: false` do not prevent rapid link activation, adds a 150ms delay after pressing the moreLink/lessLink before it can be triggered again
 * `beforeToggle: function() {}` called after a more or less link is clicked, but *before* the block is collapsed or expanded
 * `afterToggle: function() {}` called *after* the block is collapsed or expanded
 
