@@ -39,7 +39,7 @@ Include it in your HTML:
 <script src=".../readmore-custom.min.js"></script>
 ```
 And include the following libraries in your html...
-The standard jquery library [http://jquery.com/download/], jquery-ui (only 'Effects Core' is required ~ 32KB (.js), 13KB (.min.js)) [http://jqueryui.com/download/], mutation-summary.js [https://github.com/rafaelw/mutation-summary].
+The standard jQuery library [http://jquery.com/download/], jQuery-UI (only 'Effects Core' is required ~ 32KB (.js), 13KB (.min.js)) [http://jqueryui.com/download/], mutation-summary.js [https://github.com/rafaelw/mutation-summary].
 ```html
 <script src=".../jquery.js"></script>
 <script src=".../jquery-ui.js"></script>
