@@ -14,9 +14,11 @@ Modifications/Change List 28.10.15
   again in succession (within 150ms). Due to the following issue on mobile devices... the touch
   screen can often trigger the recollapse of element just after expanding and attempting to
   scroll down)
+
   === requires mutation-summary.js for the DOM element change events ===
 - Fixed the afterToggle callback which was NOT firing.
 - Added animation (that previously were not functioning correctly) using jquery-ui.
+
   === requires jquery-ui.js : Effects Core ===
 
 
