@@ -279,7 +279,6 @@
       $this.options.beforeToggle(trigger, element, ! expanded);
 
 
-
       // Fire afterToggle callback
       $element.animate({'height': newHeight}, $this.options.speed, "linear", function() {
           $this.options.afterToggle(trigger, element, expanded);
@@ -287,18 +286,6 @@
             'aria-expanded': expanded
           });
       });
-    //   $element.one('webkitTransitionEnd mozTransitionEnd transitionend', function(e) {
-    //     console.log('I got called!!!!');
-    //     $this.options.afterToggle(trigger, element, expanded);
-    //     $(this).attr({
-    //       'aria-expanded': expanded
-    //     });
-    //   });
-
-    //   $(this.options.afterToggle(trigger, element, ! expanded));
-    //   $element.attr({
-    //     'aria-expanded': expanded
-    //   });
 
       $(trigger).replaceWith($($this.options[newLink])
           .on('click', function(event) {
