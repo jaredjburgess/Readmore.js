@@ -87,7 +87,7 @@ The callback functions, `beforeToggle` and `afterToggle`, both receive the same 
 
 #### Callback example:
 
-Here's an example of how you could use the `beforeToggle` callback to scroll back to the top of the block when the "Close" link is clicked, it also check if the `disabled` attribute is present (if `disableAfterPress` true) to prevent the scroll up if the trigger is still disabled.
+Here's an example of how you could use the `beforeToggle` callback to scroll back to the top of the block when the "Close" link is clicked, it also checks if the `disabled` attribute is present (if for example `disableAfterPress` is `true`) to prevent the scroll up if the trigger is still disabled.
 
 ```javascript
 $('article').readmore({
