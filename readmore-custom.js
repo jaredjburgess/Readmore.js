@@ -7,7 +7,17 @@
  * Licensed under the MIT license
  *
  * Debounce function from http://davidwalsh.name/javascript-debounce-function
- * @jaredjburgess: Modified the expanded height to account for images in the setBoxHeights function.
+ *
+ * @jaredjburgess: v1.01
+ * - Modified the expanded height to account for multiple unspecified image heights.
+ * - Added a disableAfterPress option which prevents the readmore/readless link from being activated
+ *   again in succession (within 150ms). Due to the following issue on mobile devices... the touch
+ *   screen can often trigger the recollapse of element just after expanding and attempting to
+ *   scroll down)
+ *   === requires mutation-summary.js for the DOM element change events ===
+ * - Fixed the afterToggle callback which was NOT firing.
+ * - Added animation (that previously were not functioning correctly) using jquery-ui.
+ *   === requires jquery-ui.js : Effects Core ===
  */
 
 /* global jQuery */
@@ -17,7 +27,7 @@
 
   var readmore = 'readmore',
       defaults = {
-        speed: 100,
+        speed: 200,
         collapsedHeight: 200,
         heightMargin: 16,
         moreLink: '<a href="#">Read More</a>',
@@ -25,6 +35,7 @@
         embedCSS: true,
         blockCSS: 'display: block; width: 100%;',
         startOpen: false,
+        disableAfterPress: false,
 
         // callbacks
         beforeToggle: function(){},
@@ -140,6 +151,18 @@
     }
   }
 
+  function addTempDisableAttr(summaries) {
+      var collapseButton = summaries[0];
+      collapseButton.added.forEach(function(newEl) {
+          $(newEl).attr('disabled', 'true')
+          .delay(150)
+          .queue(function() {
+              $(this).removeAttr('disabled');
+              $(this).dequeue();
+          });
+      });
+  }
+
   function Readmore(element, options) {
     var $this = this;
 
@@ -197,21 +220,37 @@
         });
 
         current.after($(useLink)
-          .on('click', function(event) { $this.toggle(this, current[0], event); })
-          .attr({
+          .on('click', function(event) {
+            if ($(this).attr('disabled') == 'disabled') {
+                return false
+            } else {
+                $this.toggle(this, current[0], event);
+            }
+        }).attr({
             'data-readmore-toggle': '',
             'aria-controls': id
-          }));
+        }));
 
         if (! $this.options.startOpen) {
           current.css({
             height: collapsedHeight
           });
         }
+        if ($this.options.disableAfterPress) {
+            var observer = new MutationSummary ({
+                callback: addTempDisableAttr,
+                queries: [{
+                    attribute: 'data-readmore-toggle'
+                }]
+            });
+        }
       }
     },
 
     toggle: function(trigger, element, event) {
+      if ($(trigger).attr('disabled') == 'disabled') {
+          return false;
+      }
       if (event) {
         event.preventDefault();
       }
@@ -246,20 +285,38 @@
       // with our true current state, so we need to flip the value of `expanded`
       $this.options.beforeToggle(trigger, element, ! expanded);
 
-      $element.css({'height': newHeight});
+
 
       // Fire afterToggle callback
-      $element.on('animationend', function() {
-        $this.options.afterToggle(trigger, element, expanded);
-
-        $(this).attr({
-          'aria-expanded': expanded
-        }).off('animationend');
+      console.log(newHeight);
+      $element.animate({'height': newHeight}, $this.options.speed, "linear", function() {
+          console.log("ive been called bitches");
+          $this.options.afterToggle(trigger, element, expanded);
+          $element.attr({
+            'aria-expanded': expanded
+          });
       });
+    //   $element.one('webkitTransitionEnd mozTransitionEnd transitionend', function(e) {
+    //     console.log('I got called!!!!');
+    //     $this.options.afterToggle(trigger, element, expanded);
+    //     $(this).attr({
+    //       'aria-expanded': expanded
+    //     });
+    //   });
+
+    //   $(this.options.afterToggle(trigger, element, ! expanded));
+    //   $element.attr({
+    //     'aria-expanded': expanded
+    //   });
 
       $(trigger).replaceWith($($this.options[newLink])
-          .on('click', function(event) { $this.toggle(this, element, event); })
-          .attr({
+          .on('click', function(event) {
+              if ($(this).attr('disabled') == 'disabled') {
+                  return false;
+              } else {
+                  $this.toggle(this, element, event);
+              }
+          }).attr({
             'data-readmore-toggle': '',
             'aria-controls': $element.attr('id')
           }));
