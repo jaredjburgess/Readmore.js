@@ -22,7 +22,7 @@ Note: This is a fork of the original (due to the need for having numerous images
   === requires jquery-ui.js : Effects Core ===
 
 
-## To Use
+## To Setup
 
 Copy the following file
 ```
