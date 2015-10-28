@@ -13,7 +13,7 @@ Modifications/Change List 28.10.15
 - Added a disableAfterPress option which prevents the readmore/readless link from being activated
   again in succession (within 150ms). Due to the following issue on mobile devices... the touch
   screen can often trigger the recollapse of element just after expanding and attempting to
-  scroll down)
+  scroll down.
 
   === requires mutation-summary.js for the DOM element change events ===
 - Fixed the afterToggle callback which was NOT firing.
