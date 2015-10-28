@@ -87,13 +87,16 @@ The callback functions, `beforeToggle` and `afterToggle`, both receive the same 
 
 #### Callback example:
 
-Here's an example of how you could use the `afterToggle` callback to scroll back to the top of a block when the "Close" link is clicked.
+Here's an example of how you could use the `beforeToggle` callback to scroll back to the top of the block when the "Close" link is clicked, it also check if the `disabled` attribute is present (if `disableAfterPress` true) to prevent the scroll up if the trigger is still disabled.
 
 ```javascript
 $('article').readmore({
-  afterToggle: function(trigger, element, expanded) {
-    if(! expanded) { // The "Close" link was clicked
-      $('html, body').animate( { scrollTop: element.offset().top }, {duration: 100 } );
+  beforeToggle: function(trigger, element, expanded) {
+    if (expanded) { // The "Close" link was clicked
+      if (!$(trigger).is('[disabled]')) {
+        var id = '#' + element.getAttribute('id');
+        $('body').scrollTop($(id).offset().top - 145);
+      }
     }
   }
 });
@@ -180,17 +183,4 @@ Then, with a media query you could change the number of lines shown, like so:
 
 Pull requests are always welcome, but not all suggested features will get merged. Feel free to contact me if you have an idea for a feature.
 
-Pull requests should include the minified script and this readme and the demo HTML should be updated with descriptions of your new feature. 
-
-You'll need NPM:
-
-```
-$ npm install
-```
-
-Which will install the necessary development dependencies. Then, to build the minified script:
-
-```
-$ gulp compress
-```
-
+Pull requests should include the minified script and this readme and the demo HTML should be updated with descriptions of your new feature.
