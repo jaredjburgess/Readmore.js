@@ -2,6 +2,7 @@
  * @preserve
  *
  * Readmore.js jQuery plugin
+ *
  * Original - Author: @jed_foster
  * Original - Project home: http://jedfoster.github.io/Readmore.js
  * Current - Author: @jaredjburgess
@@ -12,7 +13,6 @@
  */
 
 /* global jQuery */
-/* jquery-ui (only 'Effects Core' is required) ~ 32KB (.js), 13KB (.min.js) */
 /* mutation-summary.js */
 
 (function($) {
@@ -229,6 +229,7 @@
             height: collapsedHeight
           });
         }
+
         if ($this.options.disableAfterPress) {
             var observer = new MutationSummary ({
                 callback: addTempDisableAttr,
@@ -244,11 +245,13 @@
       if ($(trigger).attr('disabled') == 'disabled') {
           return false;
       }
+
       if (event) {
         event.preventDefault();
       }
 
       if (! trigger) {
+        console.log('not trigger called');
         trigger = $('[aria-controls="' + this.element.id + '"]')[0];
       }
 
@@ -257,13 +260,14 @@
       }
 
       var $this = this,
-          $element = $(element),
-          newHeight = '',
-          newLink = '',
-          expanded = false,
-          collapsedHeight = $element.data('collapsedHeight');
+        $element = $(element),
+        newHeight = '',
+        newLink = '',
+        expanded = false,
+        collapsedHeight = $element.data('collapsedHeight');
 
       if ($element.height() <= collapsedHeight) {
+        console.log('changing exapanded to true');
         newHeight = $element.data('expandedHeight') + 'px';
         newLink = 'lessLink';
         expanded = true;
@@ -272,20 +276,20 @@
         newHeight = collapsedHeight;
         newLink = 'moreLink';
       }
-
+      console.log('checking expanded');
+      console.log(expanded);
       // Fire beforeToggle callback
       // Since we determined the new "expanded" state above we're now out of sync
       // with our true current state, so we need to flip the value of `expanded`
       $this.options.beforeToggle(trigger, element, ! expanded);
 
-
       // Fire afterToggle callback
-      $element.animate({'height': newHeight}, $this.options.speed, "linear", function() {
+      var transValue = 'height ' + $this.options.speed + 'ms'
+      $element.css('transition', transValue);
+      $element.css('height', newHeight).delay($this.options.speed).queue(function() {
           $this.options.afterToggle(trigger, element, expanded);
-          $element.attr({
-            'aria-expanded': expanded
-          });
-      });
+          $element.dequeue;
+      }).attr('aria-expanded', expanded);
 
       $(trigger).replaceWith($($this.options[newLink])
           .on('click', function(event) {
