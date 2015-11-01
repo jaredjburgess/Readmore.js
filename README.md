@@ -8,7 +8,7 @@ Readmore.js is tested with—and supported on—all versions of jQuery greater t
 
 Note: This is a fork of the original (due to the need for having numerous images of unspecified height in the content that needs to expanded & collapsed), bower install has no longer been maintained. To use see the instructions below.
 
-## Modifications/Change List 28.10.15
+## Modifications/Change List 01.11.15
 - Modified the expanded height to account for multiple unspecified image heights.
 - Added a disableAfterPress option which prevents the readmore/readless link from being activated
   again in succession (within 250ms). Due to the following issue on mobile devices... the touch
@@ -17,9 +17,7 @@ Note: This is a fork of the original (due to the need for having numerous images
 
   === requires mutation-summary.js for the DOM element change events ===
 - Fixed the afterToggle callback which was NOT firing.
-- Added animation (that previously were not functioning correctly) using jquery-ui.
-
-  === requires jquery-ui.js : Effects Core ===
+- Added animation (that previously were not functioning correctly) using css transitions.
 
 
 ## To Setup
@@ -39,10 +37,9 @@ Include it in your HTML:
 <script src=".../readmore-custom.min.js"></script>
 ```
 And include the following libraries in your html...
-The standard jQuery library [http://jquery.com/download/], jQuery-UI (only 'Effects Core' is required ~ 32KB (.js), 13KB (.min.js)) [http://jqueryui.com/download/], mutation-summary.js [https://github.com/rafaelw/mutation-summary].
+The standard jQuery library [http://jquery.com/download/], mutation-summary.js [https://github.com/rafaelw/mutation-summary].
 ```html
 <script src=".../jquery.js"></script>
-<script src=".../jquery-ui.js"></script>
 <script src=".../mutation-summary.js"></script>
 ```
 
@@ -88,7 +85,7 @@ The callback functions, `beforeToggle` and `afterToggle`, both receive the same 
 #### Callback example:
 
 Here's an example of how you could use the `beforeToggle` callback to scroll back to the top of the block when the "Close" link is clicked, it also checks if the `disabled` attribute is present (if for example `disableAfterPress` is `true`) to prevent the scroll up if the trigger is still disabled.
-
+=== requires jquery-ui.js - Effects Core for .animate ===
 ```javascript
 $('article').readmore({
   beforeToggle: function(trigger, element, expanded) {
