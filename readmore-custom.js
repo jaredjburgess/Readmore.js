@@ -251,7 +251,6 @@
       }
 
       if (! trigger) {
-        console.log('not trigger called');
         trigger = $('[aria-controls="' + this.element.id + '"]')[0];
       }
 
@@ -267,7 +266,6 @@
         collapsedHeight = $element.data('collapsedHeight');
 
       if ($element.height() <= collapsedHeight) {
-        console.log('changing exapanded to true');
         newHeight = $element.data('expandedHeight') + 'px';
         newLink = 'lessLink';
         expanded = true;
@@ -276,8 +274,7 @@
         newHeight = collapsedHeight;
         newLink = 'moreLink';
       }
-      console.log('checking expanded');
-      console.log(expanded);
+
       // Fire beforeToggle callback
       // Since we determined the new "expanded" state above we're now out of sync
       // with our true current state, so we need to flip the value of `expanded`
